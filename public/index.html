@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+        jQuery.ajax({
+            method: 'GET',
+            url: '/api'
+        }).done(res => {
+            const root = document.getElementById('root');
+
+            const value = Object.values(JSON.parse(res));
+
+            value.forEach(element => {
+                const wrapper = document.createElement('div');
+                const button = document.createElement('button');
+                wrapper.innerHTML = element.name + ' "' + element.password + '" (' + element.id + ')';
+                wrapper.appendChild(button);
+                button.innerHTML = 'Remove';
+                button.onclick = () => {
+                    console.log('do something')
+                }
+                root.appendChild(wrapper);
+            });
+        })
+    </script>
+</body>
+</html>
